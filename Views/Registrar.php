@@ -6,10 +6,10 @@ $objFun = new Funcionario();
 $objFcs = new Funcoes();
 
 if(isset($_POST['btCadastrar'])) {
-    if($objFun->queryInsert($_POST) == 'ok') {
-		echo "<script> alert('Informações Enviadas com Sucesso.'); window.location='/startbootstrap-sb-admin-gh-pages/Registrar'</script>";
+    if($objFun->inserir($_POST) == 'ok') {
+		echo "<script> alert('Informações Enviadas com Sucesso.'); window.location='http://projeto-mvc.6te.net/Registrar'</script>";
     } else {
-		echo "<script> alert('Erro ao Cadastrar.'); window.location='/startbootstrap-sb-admin-gh-pages/Registrar'</script>";
+		echo "<script> alert('Erro ao Cadastrar.'); window.location='http://projeto-mvc.6te.net/Registrar'</script>";
     }
 }
 ?>
@@ -51,8 +51,8 @@ if(isset($_POST['btCadastrar'])) {
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="password" name="confirmar_senha" id="Confirmarsenha" class="form-control" placeholder="Confirmar Senha" required="required">
-                    <label for="Confirmarsenha"> Confirmar Senha </label>
+                    <input type="password" name="confirmar_senha" id="Confirmarsenha" class="form-control" placeholder="Confirmarsenha" required="required">
+                    <label for="Confirmarsenha"> Confirmarsenha </label>
                   </div>
                 </div>
               </div>

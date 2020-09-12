@@ -1,4 +1,5 @@
 <?php
+
 class Route {
 
 	public static $validaRotas = array();
@@ -11,4 +12,3 @@ class Route {
 		}
 	}
 }
-?>

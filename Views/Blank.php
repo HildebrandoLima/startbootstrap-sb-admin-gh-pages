@@ -6,7 +6,7 @@ $objFun = new Funcionario();
 $objFcs = new Funcoes();
 
 if(isset($_POST['btAlterar'])) {
-    if($objFun->queryUpdate($_POST) == 'ok') {
+    if($objFun->alterar($_POST) == 'ok') {
         header('location: ?acao=edit&fun='.$objFcs->base64($_POST['fun'],1));
     } else {
         echo "<script> alert('Erro ao Editar.'); window.location='/startbootstrap-sb-admin-gh-pages/Registrar'</script>";
@@ -15,9 +15,9 @@ if(isset($_POST['btAlterar'])) {
 
 if(isset($_GET['acao'])) {
     switch($_GET['acao']) {
-        case 'edit': $fun = $objFun->querySeleciona($_GET['fun']); break;
+        case 'edit': $fun = $objFun->selecionaId($_GET['fun']); break;
         case 'delet':
-            if($objFun->queryDelete($_GET['fun']) == 'ok') {
+            if($objFun->deletar($_GET['fun']) == 'ok') {
                 echo "<script> alert('Informações Removidas com Sucesso.'); window.location='/startbootstrap-sb-admin-gh-pages/Registrar'</script>";
             } else {
                 echo "<script> alert('Erro ao Remover Dados.'); window.location='/startbootstrap-sb-admin-gh-pages/Registrar'</script>";
@@ -45,7 +45,7 @@ if(isset($_GET['acao'])) {
                   <div class="card-body-icon">
                     <i class="fas fa-fw fa-comments"></i>
                   </div>
-                  <div class="mr-5"><?php //foreach($objFun->queryCount() as $exibir){ echo $exibir['id_funcionario']; } ?> New Messages! </div>
+                  <div class="mr-5"><?php //foreach($objFun->contar() as $exibir){ echo $exibir['id_funcionario']; } ?> New Messages! </div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="#">
                   <span class="float-left"> View Details </span>
@@ -61,7 +61,7 @@ if(isset($_GET['acao'])) {
                   <div class="card-body-icon">
                     <i class="fas fa-fw fa-list"></i>
                   </div>
-                  <div class="mr-5"><?php //foreach($objFun->queryCount() as $exibir){ echo $exibir['id_funcionario']; } ?> New Tasks! </div>
+                  <div class="mr-5"><?php //foreach($objFun->contar() as $exibir){ echo $exibir['id_funcionario']; } ?> New Tasks! </div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="#">
                   <span class="float-left"> View Details </span>
@@ -77,7 +77,7 @@ if(isset($_GET['acao'])) {
                   <div class="card-body-icon">
                     <i class="fas fa-fw fa-shopping-cart"></i>
                   </div>
-                  <div class="mr-5"><?php //foreach($objFun->queryCount() as $exibir){ echo $exibir['id_funcionario']; } ?> New Orders! </div>
+                  <div class="mr-5"><?php //foreach($objFun->contar() as $exibir){ echo $exibir['id_funcionario']; } ?> New Orders! </div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="#">
                   <span class="float-left"> View Details </span>
@@ -93,7 +93,7 @@ if(isset($_GET['acao'])) {
                   <div class="card-body-icon">
                     <i class="fas fa-fw fa-life-ring"></i>
                   </div>
-                  <div class="mr-5"><?php //foreach($objFun->queryCount() as $exibir){ echo $exibir['id_funcionario']; } ?> New Tickets! </div>
+                  <div class="mr-5"><?php //foreach($objFun->contar() as $exibir){ echo $exibir['id_funcionario']; } ?> New Tickets! </div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="#">
                   <span class="float-left"> View Details </span>
@@ -111,28 +111,6 @@ if(isset($_GET['acao'])) {
               <i class="fas fa-table"></i> Tabela de Dados </div>
             <div class="card-body">
               <div class="table-responsive">
-				<!--
-				Rever código
-				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-				 <thead>
-                    <tr>
-                      <th> Nome </th>
-                      <th> Sobre Nome </th>
-                      <th> E-mail </th>
-                      <th> - </th>
-                    </tr>
-                  </thead>
-				  <tbody>
-					<td><form action="" method="POST">
-						<input type="text" name="nome" id="Nome" class="form-control" value="<?=$objFcs->trataCaracter((isset($fun['nome']))?($fun['nome']):(''), 2)?>" required="required"></td>
-						<td><input type="text" name="sobre_nome" id="SobreNome" class="form-control" value="<?=$objFcs->trataCaracter((isset($fun['sobre_nome']))?($fun['sobre_nome']):(''), 2)?>" required="required"></td>
-						<td><input type="text" name="email" id="Email" class="form-control" value="<?=$objFcs->trataCaracter((isset($fun['email']))?($fun['email']):(''), 2)?>" required="required"></td>
-						<td><input type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" value="<?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?>">
-						<input type="hidden" name="fun" value="<?=(isset($fun['id_funcionario']))?($objFcs->base64($fun['id_funcionario'], 1)):('')?>">
-					</form></td>
-				  </tbody>
-				</table> -->
-
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -166,7 +144,7 @@ if(isset($_GET['acao'])) {
 						<input type="hidden" name="fun" value="<?=(isset($fun['id_funcionario']))?($objFcs->base64($fun['id_funcionario'], 1)):('')?>">
 						</form></td>
 					</tr>
-					<?php foreach($objFun->querySelect() as $exibir) { ?>
+					<?php foreach($objFun->listar() as $exibir) { ?>
 					<tr>
 						<td><?=$objFcs->trataCaracter($exibir['nome'], 2)?></td>
 						<td><?=$objFcs->trataCaracter($exibir['sobre_nome'], 2)?></td>

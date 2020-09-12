@@ -1,5 +1,5 @@
 <?php
-
+//	Esta classe aplica o tratamento para caracteres, obter data atual e criptografar o id.
 class Funcoes {
 
     public function trataCaracter($valor, $tipo) {

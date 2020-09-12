@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Tempo de geração: 02-Set-2020 às 13:23
+-- Tempo de geração: 01-Set-2020 às 12:21
 -- Versão do servidor: 8.0.18
 -- versão do PHP: 7.3.12
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `funcionarios` (
   `email` varchar(50) DEFAULT NULL,
   `senha` varchar(50) DEFAULT NULL,
   `confirmar_senha` varchar(50) DEFAULT NULL,
-  `data_cadastro` datetime DEFAULT NULL,
+  `dataCadastro` datetime DEFAULT NULL,
   PRIMARY KEY (`id_funcionario`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 COMMIT;

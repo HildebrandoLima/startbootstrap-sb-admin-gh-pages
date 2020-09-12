@@ -1,5 +1,5 @@
 <?php
-
+// Classe que contém as funções para o crud da aplicação.
 include_once "Funcoes.php";
 
 class Funcionario extends Conexao {
@@ -27,7 +27,7 @@ class Funcionario extends Conexao {
         return $this->$atributo;
     }
 
-	public function querySeleciona($dado){
+	public function selecionaId($dado){
         try{
             $this->id_funcionario = $this->obj->base64($dado, 2);
             $sql = $this->con->conectar()->prepare("SELECT * FROM funcionarios WHERE id_funcionario = :idFunc;");
@@ -39,7 +39,7 @@ class Funcionario extends Conexao {
         }
     }
 
-    public function querySelect() {
+    public function listar() {
         try {
             $sql = $this->con->conectar()->prepare("SELECT * FROM funcionarios ORDER BY nome;");
             $sql->execute();
@@ -49,7 +49,7 @@ class Funcionario extends Conexao {
         }
     }
 
-	public function queryCount() {
+	public function contar() {
         try {
             $sql = $this->con->conectar()->prepare("SELECT COUNT(*) AS id_funcionario FROM funcionarios;");
             $sql->execute();
@@ -59,7 +59,7 @@ class Funcionario extends Conexao {
         }
     }
 
-    public function queryInsert($dados) {
+	public function inserir($dados) {
         try {
             $this->nome = $this->obj->trataCaracter($dados['nome'], 1);
             $this->sobre_nome = $this->obj->trataCaracter($dados['sobre_nome'], 1);
@@ -84,7 +84,7 @@ class Funcionario extends Conexao {
         }
     }
 
-    public function queryUpdate($dados) {
+    public function alterar($dados) {
         try {
             $this->id_funcionario = $this->obj->base64($dados['fun'], 2);
             $this->nome = $this->obj->trataCaracter($dados['nome'], 1);
@@ -105,7 +105,7 @@ class Funcionario extends Conexao {
         }
     }
 
-    public function queryDelete($dado) {
+    public function deletar($dado) {
         try {
             $this->id_funcionario = $this->obj->base64($dado, 2);
             $sql = $this->con->conectar()->prepare("DELETE FROM funcionarios WHERE id_funcionario = :idFunc;");
